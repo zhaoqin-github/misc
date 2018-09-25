@@ -1,10 +1,8 @@
-# Install F5 Neutron LBaaS Dashboard
+# Install F5 Neutron LBaaS Dashboard in RDO control plane
 
-## Install OpenStack control plane with Horizon enabled
+**NOTE: This document assumes that you already have RDO installed as your OpenStack control plane with Horizon and Barbican enabled.**
 
-This document assumes that you already have RDO installed as your OpenStack control plane with Horizon enabled.
-
-## Download and install F5 Neutron LBaaS Dashboard dev build
+## Download and install F5 Neutron LBaaS Dashboard dev build in your RDO control plane
 
 ```bash
 wget https://github.com/zhaoqin-github/misc/blob/master/rpm/f5-neutron-lbaas-dashboard-1.0.1.dev15-1.noarch.rpm
@@ -44,4 +42,4 @@ sed -i "s/'identity': 3/'identity': 2.0/g" /etc/openstack-dashboard/local_settin
 systemctl restart httpd.service
 ```
 
-## Use your web browser to access Horizon. F5 Neutron LBaaS Dashboard is located at 'Project'->'Network'->'Load Balancers'. Good luck!
+Then, you can use your web browser to access Horizon. F5 Neutron LBaaS Dashboard is located at 'Project'->'Network'->'Load Balancers'. Good luck!
