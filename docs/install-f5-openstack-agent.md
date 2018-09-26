@@ -12,6 +12,8 @@ wget https://github.com/zhaoqin-github/misc/raw/master/rpm/f5-openstack-agent-9.
 
 Please follow the [official installation guide](https://clouddocs.f5.com/products/openstack/agent/v9.6/) to install F5 OpenStack Agent. During the installation, please use the dev rpm package f5-openstack-agent-9.6.5.dev1-8.noarch.rpm to replace the release rpm package f5-openstack-agent-9.6.5-1.el7.noarch.rpm.
 
+**NOTE: There is a known issue in the official F5 OpenStack Agent installation guide. The requisite of f5-openstack-agent-9.6.5-1.el7.noarch.rpm is f5-sdk 3.0.11, not f5-sdk 2.3.3. Please download f5-sdk-3.0.11-1.el7.noarch.rpm from [here](https://github.com/F5Networks/f5-common-python/releases/download/v3.0.11/f5-sdk-3.0.11-1.el7.noarch.rpm)**
+
 ## Configure Barbican F5 Agent configuration file
 
 vi /etc/neutron/services/f5/f5-openstack-agent.ini
