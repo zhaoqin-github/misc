@@ -5,7 +5,7 @@
 ## Download F5 OpenStack Agent dev build
 
 ```bash
-wget https://github.com/zhaoqin-github/misc/blob/master/rpm/f5-agent-package.noarch.rpm
+wget https://github.com/zhaoqin-github/misc/raw/master/rpm/f5-agent-package.noarch.rpm
 ```
 
 ## Install F5 OpenStack Agent

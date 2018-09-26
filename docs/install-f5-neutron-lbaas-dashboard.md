@@ -5,7 +5,7 @@
 ## Download and install F5 Neutron LBaaS Dashboard dev build in your RDO control plane
 
 ```bash
-wget https://github.com/zhaoqin-github/misc/blob/master/rpm/f5-neutron-lbaas-dashboard-1.0.1.dev15-1.noarch.rpm
+wget https://github.com/zhaoqin-github/misc/raw/master/rpm/f5-neutron-lbaas-dashboard-1.0.1.dev15-1.noarch.rpm
 rpm -Uvh f5-neutron-lbaas-dashboard-1.0.1.dev15-1.noarch.rpm
 ```
 
