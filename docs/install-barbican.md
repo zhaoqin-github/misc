@@ -107,10 +107,13 @@ vi  /etc/httpd/conf.d/wsgi-barbican.conf
 ```
 
 ## Start Barbican
+
+```bash
 systemctl restart httpd.service
 mkdir /var/cache/barbican 
 chown barbican:barbican /var/cache/barbican/ 
 systemctl start openstack-barbican-api.service
+```
 
 ## Verify if Barbican API can work
 
