@@ -5,8 +5,7 @@ This document assumes you already have RDO installed as your OpenStack controll 
 ## Install Barbican RPM on your RDO controller
 
 ```bash
-yum install -y openstack-barbican-api
-yum install -y python-barbicanclient
+yum install -y openstack-barbican-api python2-barbicanclient
 ```
 
 ## Create Barbican DB
@@ -32,31 +31,53 @@ openstack endpoint create --region RegionOne key-manager --internalurl http://${
 
 ## Configure Barbican
 
-vim /etc/barbican/barbican.conf
+vi /etc/barbican/barbican.conf
 
 ```
-[default]
-transport_url = rabbit://guest:guest@localhost:5672/
-sql_connection = mysql+pymysql://barbican:BARBICAN_DBPASS@localhost/barbican
+[DEFAULT]
+transport_url = rabbit://guest:guest@<your_rdo_controller_ip>:5672/
 ```
 
-vim /etc/barbican/barbican-api-paste.ini
+```
+# Host name, for use in HATEOAS-style references
+#  Note: Typically this would be the load balanced endpoint that clients would use
+#  communicate back with this service.
+host_href = http://<your_rdo_controller_ip>:9311
+```
+
+```
+# SQLAlchemy connection string for the reference implementation
+# registry server. Any valid SQLAlchemy connection string is fine.
+# See: http://www.sqlalchemy.org/docs/05/reference/sqlalchemy/connections.html#sqlalchemy.create_engine
+# Uncomment this for local dev, putting db in project directory:
+#sql_connection = sqlite:///barbican.sqlite
+# Note: For absolute addresses, use '////' slashes after 'sqlite:'
+# Uncomment for a more global development environment
+sql_connection = mysql+pymysql://barbican:BARBICAN_DBPASS@<your_rdo_controller_ip>/barbican
+```
+
+vi /etc/barbican/barbican-api-paste.ini
 
 ```
 [composite:main]
 use = egg:Paste#urlmap
 /: barbican_version
 /v1: barbican-api-keystone
+```
 
+```
 [filter:keystone_authtoken]
-paste.filter_factory = keystonemiddleware.auth_token:filter_factory
-auth_host = localhost
-signing_dir = /var/cache/barbican
-auth_port = 35357
 auth_protocol = http
-admin_tenant_name = admin
-admin_user = admin
-admin_password = XXXXXXXXXX
+auth_host = <your_rdo_controller_ip>
+auth_port = 35357
+signing_dir = /var/cache/barbican
+paste.filter_factory = keystonemiddleware.auth_token:filter_factory
+#need ability to re-auth a token, thus admin url
+identity_uri = http://<your_rdo_controller_ip>:35357
+admin_tenant_name = services
+admin_user = barbican
+admin_password = Password
+auth_version = v3.0
 ```
 
 # Sync Barbican DB
@@ -67,7 +88,7 @@ su -s /bin/sh -c "barbican-manage db upgrade" barbican
 
 ### Configure Barbican virutal host
 
-vim  /etc/httpd/conf.d/wsgi-barbican.conf
+vi  /etc/httpd/conf.d/wsgi-barbican.conf
 
 ```
 <VirtualHost [::1]:9311> 
@@ -97,16 +118,4 @@ systemctl start openstack-barbican-api.service
 barbican secret container list --os-identity-api-version 2.0
 ```
 
-## Config F5 LBaaS Agent
-
-vim /etc/neutron/services/f5/f5-openstack-agent.ini
-
-```
-cert_manager = f5_openstack_agent.lbaasv2.drivers.bigip.barbican_cert.BarbicanCertManager
-```
-
-Restart F5 LBaaS Agent
-
-```bash
-systemctl restart f5-openstack-agent
-```
+Then you will be able to call Barbican API to upload your secrets and certificates. Good luck!
