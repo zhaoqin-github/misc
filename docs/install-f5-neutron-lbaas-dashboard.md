@@ -30,7 +30,7 @@ Configure Horizon virtual host.
 sed -i '/  WSGIDaemonProcess/a\  WSGIApplicationGroup %{GLOBAL}'   /etc/httpd/conf.d/15-horizon_vhost.conf
 ```
 
-Configure Keystone version, if your are using Keyston v2.
+Configure Keystone setting in Horizon
 
 ```bash
 sed -i "s/'identity': 3/'identity': 2.0/g" /etc/openstack-dashboard/local_settings

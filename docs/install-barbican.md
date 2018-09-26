@@ -1,6 +1,6 @@
 # Install Barbican
 
-**NOTE: This document assumes you already have RDO installed as your OpenStack controll plane.**
+**NOTE: This document assumes you already have RDO installed as your OpenStack controll plane. If you are using other OpenStack distribution, please work with your OpenStack vendor to enable Barbican.**
 
 ## Install Barbican RPM on your RDO controller
 
