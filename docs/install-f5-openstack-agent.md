@@ -5,12 +5,12 @@
 ## Download F5 OpenStack Agent dev build
 
 ```bash
-wget https://github.com/zhaoqin-github/misc/raw/master/rpm/f5-agent-package.noarch.rpm
+wget https://github.com/zhaoqin-github/misc/raw/master/rpm/f5-openstack-agent-9.6.5.dev1-8.noarch.rpm
 ```
 
 ## Install F5 OpenStack Agent
 
-Please follow the [official installation guide](https://clouddocs.f5.com/products/openstack/agent/v9.6/) to install F5 OpenStack Agent. During the installation, please use the dev rpm package f5-agent-package.noarch.rpm to replace the release rpm package f5-openstack-agent-9.6.5-1.el7.noarch.rpm.
+Please follow the [official installation guide](https://clouddocs.f5.com/products/openstack/agent/v9.6/) to install F5 OpenStack Agent. During the installation, please use the dev rpm package f5-openstack-agent-9.6.5.dev1-8.noarch.rpm to replace the release rpm package f5-openstack-agent-9.6.5-1.el7.noarch.rpm.
 
 ## Configure Barbican F5 Agent configuration file
 
