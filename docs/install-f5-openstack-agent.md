@@ -14,6 +14,19 @@ Please follow the [official installation guide](https://clouddocs.f5.com/product
 
 **NOTE: There is a known issue in the official F5 OpenStack Agent installation guide. The requisite of f5-openstack-agent-9.6.5-1.el7.noarch.rpm is f5-sdk 3.0.11, not f5-sdk 2.3.3. Please download f5-sdk-3.0.11-1.el7.noarch.rpm from [here](https://github.com/F5Networks/f5-common-python/releases/download/v3.0.11/f5-sdk-3.0.11-1.el7.noarch.rpm)**
 
+## Configure Neutron
+
+vi /etc/neutron/neutron.conf
+
+```
+[service_auth]
+auth_url=http://<your_rdo_controller_ip>:35357/v2.0
+admin_user = admin
+admin_tenant_name = admin
+admin_password=<your_rdo_admin_password>
+auth_version = 2
+```
+
 ## Configure Barbican F5 Agent configuration file
 
 vi /etc/neutron/services/f5/f5-openstack-agent.ini
